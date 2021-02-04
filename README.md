@@ -34,6 +34,36 @@ Password:   odroid
 passwd
 ```
 
+### Resitze Partition
+In order to use full capacity of your sd card, you need to expand rootfs partiiton (*in default, its about 700M in size*).
+First you need to resize the partition, you can do it automatically with this command:
+```bash
+fdisk /dev/mmcblk0 << EOF
+d
+2
+n
+p
+2
+262144
+
+w
+EOF
+```
+This will remove second partion on device mmcblk0 (sd card) and re-create it with **initial offset 262144 blocks** (this is important, there is boot sector in 0-262143, you can check your offset by `fdisk -l` but it should be the same).
+After, it will write the changes to device, technicallly just rewriting end block of partition, *without affecting rootfs inside*.
+
+**Then you need to resize the filesystem**:
+```bash
+resize2fs /dev/mmcblk0p2
+```
+
+After those steps are done, you can reboot and check the change with `lsblk`:
+```bash
+reboot
+
+lsblk
+```
+
 ### Configure Power Button Action
 Because there was problem with logind power key handling (after wakeup instantly goes to sleep again), now its in acpi hands.
 This step can be skipped if you planning install any desktop enviroment (GNOME, MATE, LXDE, ..)(they have their own configs and powermanagers).
