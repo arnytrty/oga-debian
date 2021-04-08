@@ -13,7 +13,7 @@ oga-debian is Debain port for ODROID GO series, supported devices are:
 ---
 
 # Prebuild Image
-You can download prebuild image [HERE](http://web-18atrtuseka.panska.cz/projects/odroidfiles/oga-debian.img), its hosted on my school's server. More Information about image:
+You can download prebuild image on http://web-18atrtuseka.panska.cz/projects/odroidfiles/oga-debian.img, its hosted on my school's server. More Information about image:
 ```
 Build Date:     2021.2.2
 
